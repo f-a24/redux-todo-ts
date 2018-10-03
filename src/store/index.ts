@@ -1,8 +1,8 @@
-import { createStore as reduxCreateStore, combineReducers, applyMiddleware } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
-import tasksReducer from '../reducers/tasksReducer';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { applyMiddleware, combineReducers, createStore as reduxCreateStore } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
+import tasksReducer from '../reducers/tasksReducer';
 
 const loggerSetting = {
   predicate: (getState: any, action: any) => action.type !== 'HIGH_FREQUENCY_ACTION'

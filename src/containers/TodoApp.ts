@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { addTask, inputTask } from '../actions/tasks';
 import TodoApp from '../components/TodoApp';
-import { inputTask, addTask } from '../actions/tasks';
 
 interface IState {
   tasks: {

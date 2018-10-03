@@ -1,5 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { inputTask, addTask } from '../actions/tasks';
+import { addTask, inputTask } from '../actions/tasks';
 
 interface IState {
   task: string;

@@ -1,14 +1,14 @@
+import createBrowserHistory from 'history/createBrowserHistory';
 import * as React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { Route } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
+import Error from './components/Error';
 import TodoApp from './containers/TodoApp';
+import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 import createStore from './store';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { Route } from 'react-router-dom';
-import Error from './components/Error';
-import './index.css';
 
 /* historyインスタンス生成   */
 const history = createBrowserHistory();
