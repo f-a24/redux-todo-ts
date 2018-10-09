@@ -8,7 +8,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import * as React from 'react';
-import * as CSSTransitionGroup from 'react-transition-group/TransitionGroup';
+import { CSSTransition } from 'react-transition-group';
 import './TodoApp.css';
 
 interface IProps {
@@ -23,42 +23,39 @@ interface IProps {
 export default class TodoApp extends React.Component<IProps> {
   constructor(props: IProps) {
     super(props);
-    this.inputHandler = this.inputHandler.bind(this);
-    this.addHandler = this.addHandler.bind(this);
-    this.errorHandler = this.errorHandler.bind(this);
   }
-  public render() {
-    return (
-      <div>
+  public render = () => (
+    <div>
       <CssBaseline />
       <AppBar position="static">
-      <Toolbar>
-      <Typography variant="title" color="inherit">Todo</Typography>
-      </Toolbar>
+        <Toolbar>
+          <Typography variant="title" color="inherit">Todo</Typography>
+        </Toolbar>
       </AppBar>
       <Input onChange={this.inputHandler} />
       <Button variant="raised" color="primary" onClick={this.addHandler}>add</Button>
       <List>
-      <CSSTransitionGroup transitionName="example" transitionEnterTimeout={300}>
-      {
-        this.props.tasks.map((item, i) =>
-          <ListItem key={i}>
-          <ListItemText primary={`・${item}`} />
-          </ListItem>)
-      }
-      </CSSTransitionGroup>
+        <CSSTransition timeout={300} classNames="example">
+          <>
+          {
+            this.props.tasks.map((item, i) =>
+              <ListItem key={i}>
+                <ListItemText primary={`・${item}`} />
+              </ListItem>)
+          }
+          </>
+        </CSSTransition>
       </List>
       <button onClick={this.errorHandler}>Error</button>
-      </div>
-      );
+    </div>
+  );
+  private inputHandler = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    this.props.inputTask(e.currentTarget.value);
   }
-  private inputHandler (e: any): void {
-    this.props.inputTask(e.target.value);
-  }
-  private addHandler(): void {
+  private addHandler = (): void => {
     this.props.addTask(this.props.task);
   }
-  private errorHandler(): void {
+  private errorHandler = (): void => {
     this.props.redirectToError();
   }
 }

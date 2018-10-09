@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { Dispatch } from 'redux';
 import { addTask, inputTask } from '../actions/tasks';
 import TodoApp from '../components/TodoApp';
 
@@ -16,7 +17,7 @@ export default connect(
     task: tasks.task,
     tasks: tasks.tasks
   }),
-  (dispatch: any) =>
+  (dispatch: Dispatch) =>
   ({
     addTask(task: string) {
       dispatch(addTask(task));
