@@ -3,7 +3,7 @@ import * as React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import Error from './components/Error';
 import TodoApp from './containers/TodoApp';
 import './index.css';

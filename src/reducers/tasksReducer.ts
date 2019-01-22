@@ -1,6 +1,7 @@
-import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { addTask, inputTask } from '../actions/tasks';
+import { Reducer } from 'redux';
+import { ADD_TASK, addTask, INPUT_TASK, inputTask } from '../actions/tasks';
 
+type Action = ReturnType<typeof addTask | typeof inputTask>;
 interface IState {
   task: string;
   tasks: string[];
@@ -13,12 +14,20 @@ const initialState: IState = {
 };
 
 /* Reducer */
-export default reducerWithInitialState(initialState)
-    .case(inputTask, (state: IState, payload: string) => ({
-      ...state,
-      task: payload
-    }))
-    .case(addTask , (state: IState, payload: string) => ({
-      ...state,
-      tasks: state.tasks.concat([payload])
-    }));
+export default ((state = initialState, action) => {
+  switch(action.type) {
+    case ADD_TASK: {
+      return {
+        ...state,
+        tasks: state.tasks.concat([action.payload.task])
+      }
+    }
+    case INPUT_TASK: {
+      return {
+        ...state,
+        task: action.payload.task
+      }
+    }
+    default: return state;
+  }
+}) as Reducer<IState, Action>;

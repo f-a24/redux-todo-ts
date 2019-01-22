@@ -1,5 +1,5 @@
 import { History } from 'history';
-import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { routerMiddleware, connectRouter } from 'connected-react-router'
 import {
   Action,
   applyMiddleware,
@@ -35,10 +35,10 @@ const savedState = JSON.parse(window.localStorage.getItem('app-state') || '{}');
 export default function createStore(history: History) {
   return reduxCreateStore(
     combineReducers({
-      router: routerReducer,
-      tasks: tasksReducer
+      router: connectRouter(history),
+      tasks: tasksReducer,
     }),
-    savedState ? savedState : tasksReducer({task: '', tasks: []}, {type: 'INIT'}),
+    savedState ? savedState : {task: '', tasks: []},
     applyMiddleware(routerMiddleware(history), logger, storageMiddleware, thunk)
   );
 }
